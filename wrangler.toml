@@ -1,0 +1,19 @@
+workers_dev = true
+name = "honeytrip"
+compatibility_date = "2024-11-18"
+compatibility_flags = ["nodejs_compat"]
+main = "./build/server/index.js"
+assets = { directory = "./build/client/" }
+
+routes = [
+  { pattern = "honeytrip.emascarua.uk/*", zone_id = "9876c7c9cc4d8e0bbdff11354f37f9a5" }
+]
+
+[vars]
+VALUE_FROM_CLOUDFLARE = "Hello from Cloudflare"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "honeytrip-prod-db"
+database_id = "d2b5ed47-742a-40b6-9665-edb765c77b02"
+migrations_dir = "drizzle"
