@@ -1,10 +1,18 @@
+import { Button } from "~/components/ui/button";
+
+import type { Route } from "./+types/landing";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Honey Trip" },
+    { name: "description", content: " Sweet adventures start with planning " },
+  ];
+}
+
 export default function Home() {
   return (
-    <p id="index-page">
-      This is a demo for React Router.
-      <br />
-      Check out{" "}
-      <a href="https://reactrouter.com">the docs at reactrouter.com</a>.
-    </p>
+    <div className="flex flex-col items-center justify-center min-h-svh">
+      <Button> Sweet adventures start with planning </Button>
+    </div>
   );
 }
