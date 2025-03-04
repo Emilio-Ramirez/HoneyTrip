@@ -1,3 +1,4 @@
+/*app.css*/
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -20,7 +21,7 @@ body {
 
 :root {
   /* Convert your hex colors to OKLCH */
-  --background: oklch(1 0 0); /* white */
+  --background: oklch(0.95 0.03 95); /* #f5f4e0 (cream) */
   --foreground: oklch(0.25 0.024 30); /* #423839 (stone-brown) */
 
   --card: oklch(1 0 0);
@@ -30,7 +31,6 @@ body {
   --popover-foreground: oklch(0.25 0.024 30); /* stone-brown */
 
   --primary: oklch(0.76 0.15 85); /* #d9a919 (honey-gold) */
-  --primary-foreground: oklch(1 0 0);
 
   --secondary: oklch(0.52 0.12 115); /* #8b8b33 (olive-green) */
   --secondary-foreground: oklch(1 0 0);
@@ -38,7 +38,7 @@ body {
   --muted: oklch(0.45 0.14 65); /* #8e5915 (amber-brown) */
   --muted-foreground: oklch(1 0 0);
 
-  --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
+ggV --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
   --accent-foreground: oklch(0.25 0.024 30);
 
   --destructive: oklch(0.58 0.21 25); /* #db4342 (error) */
