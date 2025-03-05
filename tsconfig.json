@@ -5,6 +5,10 @@
     { "path": "./tsconfig.cloudflare.json" }
   ],
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "checkJs": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
