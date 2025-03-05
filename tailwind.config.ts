@@ -24,16 +24,15 @@ export default {
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-ring)",
-        lavender: "#c09cba",
-        error: "#db4342",
+        lavender: "var(--color-lavender)",
       },
       borderRadius: {
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         lg: "var(--radius-lg)",
-        xl: "var(--radius-xl)"
-      }
+        xl: "var(--radius-xl)",
+      },
     },
   },
-plugins: [require("tailwindcss-animate")],
-}satisfies Config;
+  plugins: [require("tailwindcss-animate")],
+} satisfies Config;
