@@ -9,7 +9,6 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { usePreventOverscroll } from "./hooks/usePreventOverscroll";
 
 //Global fornts
 export const links: Route.LinksFunction = () => [
@@ -44,7 +43,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  usePreventOverscroll();
   return <Outlet />;
 }
 

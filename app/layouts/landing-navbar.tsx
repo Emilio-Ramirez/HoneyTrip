@@ -19,12 +19,16 @@ export default function LandingNavbar() {
             to="/"
             className="text-primary text-2xl md:text-4xl  font-bold tracking-wide"
           >
-            Honey Trip
+            Honey Trip 🍯
           </Link>
         </div>
         <div className="flex gap-4 md:gap-10">
-          <Button className="bg-primary">Login</Button>
-          <Button className="bg-primary">Sign Up</Button>
+          <Link to="/login" prefetch="intent">
+            <Button className="bg-primary">Login</Button>
+          </Link>
+          <Link to="/sign-up" prefetch="intent">
+            <Button className="bg-primary">Sign Up</Button>
+          </Link>
         </div>
       </nav>
       <main className="">
