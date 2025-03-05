@@ -1,7 +1,6 @@
 /*app.css*/
 @import "tailwindcss";
-
-@plugin "tailwindcss-animate";
+@import "normalize.css" @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -12,7 +11,7 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-background dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -31,14 +30,17 @@ body {
   --popover-foreground: oklch(0.25 0.024 30); /* stone-brown */
 
   --primary: oklch(0.76 0.15 85); /* #d9a919 (honey-gold) */
+  --primary-foreground: oklch(0.25 0.024 30);
 
   --secondary: oklch(0.52 0.12 115); /* #8b8b33 (olive-green) */
   --secondary-foreground: oklch(1 0 0);
 
+  --lavender: oklch(0.68 0.1 315); /* #c09cba */
+
   --muted: oklch(0.45 0.14 65); /* #8e5915 (amber-brown) */
   --muted-foreground: oklch(1 0 0);
 
-ggV --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
+  --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
   --accent-foreground: oklch(0.25 0.024 30);
 
   --destructive: oklch(0.58 0.21 25); /* #db4342 (error) */
@@ -61,7 +63,6 @@ ggV --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
-  --lavender: oklch(0.68 0.1 315); /* #c09cba */
 }
 
 .dark {
@@ -109,6 +110,7 @@ ggV --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
     0.76 0.15 85 / 0.3
   ); /* honey-gold with transparency */
   --sidebar-ring: oklch(0.76 0.15 85); /* honey-gold */
+  --lavender: oklch(0.68 0.1 315); /* #c09cba */
 }
 
 @theme inline {
@@ -148,6 +150,7 @@ ggV --accent: oklch(0.81 0.18 85); /* #f3b315 (bright-yellow) */
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-lavender: var(--lavender);
 }
 
 @layer base {
