@@ -23,6 +23,7 @@
     "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "~/database/*": ["./database/*"],
+      "~/public/*": ["./public/*"],
       "~/*": ["./app/*"],
       "~/components/*": ["./app/components/*"],
       "~/components/ui/*": ["./app/components/ui/*"],
