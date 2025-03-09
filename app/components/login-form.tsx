@@ -1,14 +1,15 @@
-import { cn } from "app/lib/utils"
-import { Button } from "app/components/ui/button"
+import { cn } from "app/lib/utils";
+import { Button } from "app/components/ui/button";
+import { Form } from "react-router";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "app/components/ui/card"
-import { Input } from "app/components/ui/input"
-import { Label } from "app/components/ui/label"
+} from "app/components/ui/card";
+import { Input } from "app/components/ui/input";
+import { Label } from "app/components/ui/label";
 
 export function LoginForm({
   className,
@@ -24,7 +25,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <Form>
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
                 <Button variant="outline" className="w-full">
@@ -56,6 +57,7 @@ export function LoginForm({
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="m@example.com"
                     required
@@ -71,7 +73,12 @@ export function LoginForm({
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                  />
                 </div>
                 <Button type="submit" className="w-full">
                   Login
@@ -84,7 +91,7 @@ export function LoginForm({
                 </a>
               </div>
             </div>
-          </form>
+          </Form>
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
@@ -92,5 +99,5 @@ export function LoginForm({
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>
-  )
+  );
 }

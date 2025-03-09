@@ -9,7 +9,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function Landing() {
+export default function LandingPage() {
   return (
     <div className="h-auto flex flex-col">
       <div className="p-10 md:p-20 text-center">
@@ -58,3 +58,4 @@ export default function Landing() {
     </div>
   );
 }
+

@@ -5,3 +5,9 @@ export const guestBook = sqliteTable("guestBook", {
   name: text().notNull(),
   email: text().notNull().unique(),
 });
+
+export const users = sqliteTable("users", {
+  id: integer().primaryKey({ autoIncrement: true }),
+  email: text().notNull().unique(),
+  password: text().notNull(),
+});
