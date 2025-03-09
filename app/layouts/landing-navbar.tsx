@@ -12,8 +12,8 @@ export function meta({}: Route.MetaArgs) {
 export default function LandingNavbar() {
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="fixed top-0 left-0  h-16 bg-foreground z-5"></div>
-      <nav className="bg-foreground p-4 flex justify-between sticky top-0 z-10 ">
+      <div className="fixed top-0 left-0 w-full h-16 bg-foreground z-5"></div>
+      <nav className="bg-foreground p-4 flex justify-between sticky top-0 z-10 w-full">
         <div className="flex items-center">
           <Link
             to="/"
