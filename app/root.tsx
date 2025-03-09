@@ -25,6 +25,31 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+export function meta() {
+  return [
+    { title: "Honey Trip" },
+    { name: "description", content: "Sweet adventures start with planning" },
+    { charset: "utf-8" },
+    { viewport: "width=device-width, initial-scale=1" },
+
+    // Open Graph tags for social sharing
+    { property: "og:title", content: "Honey Trip" },
+    {
+      property: "og:description",
+      content: "Sweet adventures start with planning",
+    },
+    { property: "og:type", content: "website" },
+
+    // Twitter Card tags
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: "Honey Trip" },
+    {
+      name: "twitter:description",
+      content: "Sweet adventures start with planning",
+    },
+  ];
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
