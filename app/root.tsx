@@ -40,6 +40,12 @@ export function meta() {
     },
     { property: "og:type", content: "website" },
 
+    {
+      property: "og:image",
+      content: "https://honeytrip.emascarua.uk/alexMegosEating.jpg",
+    },
+    { property: "og:url", content: "https://honeytrip.emascarua.uk" },
+
     // Twitter Card tags
     { name: "twitter:card", content: "summary" },
     { name: "twitter:title", content: "Honey Trip" },
