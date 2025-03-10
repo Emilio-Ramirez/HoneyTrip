@@ -13,29 +13,25 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  console.log("Context:", context);
-  console.log("DB available:", !!context?.db);
-
   let formData = await request.formData();
   let email = formData.get("email");
   let password = formData.get("password");
 
-  console.log("Form data:", { email, password });
+  if (typeof email !== "string" || typeof password !== "string") {
+    return { success: false, message: "Invalid form data" };
+  }
 
-  // Rest of your function...
+  email = email.trim();
+  password = password.trim();
   try {
-    context.db.insert(schema.users).values({
-      email: email as string,
-      password: password as string,
+     await context.db.insert(schema.users).values({
+      email,
+      password,
     });
-
     return { success: true, message: "User created successfully" };
   } catch (error) {
-    console.error("Insert error:", error);
     return {
-      success: false,
-      message:
-        error instanceof Error ? error.message : "An unknown error occurred",
+      Error: "There was an error creating your account. Please try again.",
     };
   }
 }
@@ -52,7 +48,7 @@ export default function LoginPage({ actionData }: Route.ComponentProps) {
       {actionData ? (
         <div>
           <p>Action Result: {JSON.stringify(actionData)}</p>
-          <p>Success: {actionData.success ? "Yes" : "No"}</p>
+          <p>Success: {actionData.success }</p>
           <p>Message: {actionData.message}</p>
         </div>
       ) : null}
