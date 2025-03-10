@@ -15,6 +15,13 @@
       "when": 1741554253086,
       "tag": "0001_outstanding_triton",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1741574556033,
+      "tag": "0002_organic_lady_deathstrike",
+      "breakpoints": true
     }
   ]
 }
