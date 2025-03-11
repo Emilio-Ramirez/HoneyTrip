@@ -11,9 +11,9 @@ import { relations } from "drizzle-orm";
 // Users Management
 export const users = sqliteTable("users", {
   id: integer().primaryKey({ autoIncrement: true }),
+  appwrite_id: text().notNull(),
   email: text().notNull().unique(),
-  name: text().notNull(),
-  password: text().notNull(),
+  name: text().notNull().unique(),
   profile_photo_url: text(),
   bio: text(),
   default_language: text(),
