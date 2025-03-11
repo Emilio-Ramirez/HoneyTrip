@@ -4,7 +4,6 @@ import { Form } from "react-router";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "app/components/ui/card";
@@ -22,7 +21,7 @@ export function SignUpForm({
           <CardTitle className="text-xl">Register </CardTitle>
         </CardHeader>
         <CardContent>
-          <Form>
+          <Form method="post">
             <div className="grid gap-6">
               <div className="grid gap-6">
                 <div className="grid gap-3">

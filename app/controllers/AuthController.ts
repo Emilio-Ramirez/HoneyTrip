@@ -15,15 +15,20 @@ export function getAppwriteClient(context: any) {
 export async function createUser(
   context: any,
   email: string,
-  password?: string,
-  name?: string
+  password: string,
+  name: string
 ) {
   const { account } = getAppwriteClient(context);
   let appwriteUser;
 
   try {
     // Create user in Appwrite
-    appwriteUser = await account.create(ID.unique(), email, password || "", name);
+    appwriteUser = await account.create(
+      ID.unique(),
+      email,
+      password || "",
+      name
+    );
     console.log("User created:", appwriteUser);
 
     // Insert user in database
@@ -34,7 +39,7 @@ export async function createUser(
         name: appwriteUser.name,
       });
 
-      return appwriteUser;
+      return appwriteUser.name;
     } catch (dbError) {
       console.error("Error inserting user into database:", dbError);
       try {
