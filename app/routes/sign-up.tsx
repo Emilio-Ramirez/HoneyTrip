@@ -1,12 +1,11 @@
 import { SignUpForm } from "~/components/singup-form";
-import { Form } from "react-router";
 import type { Route } from "./+types/landing";
 import { createUser } from "~/controllers/AuthController";
 import { redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Login" },
+    { title: "Sign Up" },
     { name: "description", content: "Sweet adventures start with planning" },
     { name: "theme-color", content: "#423839" },
   ];

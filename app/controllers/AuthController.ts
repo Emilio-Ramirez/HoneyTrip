@@ -39,6 +39,8 @@ export async function createUser(
         name: appwriteUser.name,
       });
 
+      // TODO: Send succes modal
+      // TODO: Redirect to dashboard
       return appwriteUser.name;
     } catch (dbError) {
       console.error("Error inserting user into database:", dbError);
@@ -55,5 +57,21 @@ export async function createUser(
     console.error("Error creating user:", error);
 
     throw error;
+  }
+}
+
+export async function login(context: any, email: string, password: string) {
+  const account = getAppwriteClient(context).account;
+  let appwriteUser;
+
+  try {
+    // Login user in Appwrite
+    // TODO : Set session time
+    appwriteUser = await account.createEmailPasswordSession(email, password);
+    console.log("User logged in, session:", appwriteUser);
+    return;
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    return { error: "Problem with the login" + error };
   }
 }
