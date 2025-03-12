@@ -16,7 +16,7 @@ export default function LandingNavbar() {
       <nav className="bg-foreground p-4 flex justify-between sticky top-0 z-10 w-full">
         <div className="flex items-center">
           <Link
-            to="/"
+            to="/Home"
             className="text-primary text-2xl md:text-4xl  font-bold tracking-wide"
           >
             Honey Trip 🍯

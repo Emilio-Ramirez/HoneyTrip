@@ -1,6 +1,6 @@
 import { cn } from "app/lib/utils";
 import { Button } from "app/components/ui/button";
-import { Form } from "react-router";
+import { Form, Link } from "react-router";
 import {
   Card,
   CardContent,
@@ -25,7 +25,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Form>
+          <Form method="post">
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
                 <Button variant="outline" className="w-full">
@@ -48,7 +48,7 @@ export function LoginForm({
                 </Button>
               </div>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-background text-muted-foreground relative z-10 px-2">
+                <span className="bg-background relative z-10 px-2">
                   Or continue with
                 </span>
               </div>
@@ -66,12 +66,14 @@ export function LoginForm({
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
+                    {/*
+                     *<a
+                     *  href="#"
+                     *  className="ml-auto text-sm underline-offset-4 hover:underline"
+                     *>
+                     *  Forgot your password?
+                     *</a>
+                     */}
                   </div>
                   <Input
                     id="password"
@@ -86,9 +88,9 @@ export function LoginForm({
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a href="#" className="underline underline-offset-4">
+                <Link to="/sign-up" className="underline underline-offset-4">
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </Form>
