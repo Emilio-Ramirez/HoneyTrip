@@ -11,8 +11,15 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  const formData = await request.formData();
-  return auth.createSession(formData, context);
+  try {
+    const formData = await request.formData();
+    return await auth.createSession(formData, context);
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Login failed",
+    };
+  }
 }
 
 export default function Login() {

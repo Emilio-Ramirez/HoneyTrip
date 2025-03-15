@@ -3,7 +3,6 @@ import { createAdminClient, createSessionClient } from "./appwriteConfig";
 import type { Models } from "node-appwrite";
 import { ID } from "node-appwrite";
 
-
 interface AuthState {
   getUser: (
     request: Request
@@ -14,6 +13,7 @@ interface AuthState {
 }
 
 const auth: AuthState = {
+  // Get user from session
   getUser: async (request?: Request) => {
     // Get cookie in different ways depending on environment
     let sessionValue;
@@ -54,7 +54,7 @@ const auth: AuthState = {
     }
   },
 
-  // Updated auth.createSession
+  // Create session and set cookie
   createSession: async (formData: FormData, context: any) => {
     const data = Object.fromEntries(formData);
     const email = String(data.email || "");
@@ -80,7 +80,7 @@ const auth: AuthState = {
       return response;
     } catch (error) {
       console.error("Login failed:", error);
-      throw error;
+      throw new Error("Login failed");
     }
   },
 
@@ -100,10 +100,11 @@ const auth: AuthState = {
       return auth.createSession(formData, context);
     } catch (error) {
       console.error("Error creating user:", error);
-      throw error;
+      throw new Error("Error creating user");
     }
   },
 
+  // Delete session and clear cookie
   deleteSession: async () => {
     // Note: We'll handle the session deletion in the route action
     const response = redirect("/login");

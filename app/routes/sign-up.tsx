@@ -11,11 +11,18 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  const formData = await request.formData();
-  return auth.createUser(formData, context);
+  try {
+    const formData = await request.formData();
+    return auth.createUser(formData, context);
+  } catch (error) {
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "User creation failed",
+    };
+  }
 }
 
-export default function SignUp({ actionData }: Route.ComponentProps) {
+export default function SignUp() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">
