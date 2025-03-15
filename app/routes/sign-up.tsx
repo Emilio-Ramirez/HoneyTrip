@@ -1,7 +1,6 @@
 import { SignUpForm } from "~/components/singup-form";
 import type { Route } from "./+types/landing";
-import { createUser } from "~/controllers/AuthController";
-import { redirect } from "react-router";
+import auth from "~/controllers/auth/auth";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,37 +11,18 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  let formData = await request.formData();
-  let name = formData.get("name");
-  let email = formData.get("email");
-  let password = formData.get("password");
-
-  if (
-    typeof email !== "string" ||
-    typeof password !== "string" ||
-    typeof name !== "string"
-  ) {
-    return { success: false, message: "Invalid form data" };
-  }
-
-  name = name.trim();
-  email = email.trim();
-  password = password.trim();
   try {
-    let userName = await createUser(context, email, password, name);
-
-    console.log("User created:", userName);
-    // TODO: Use a modal to show a success message
-    return redirect("/");
+    const formData = await request.formData();
+    return auth.createUser(formData, context);
   } catch (error) {
     return {
-      // TODO: Use a modal to show an error message
-      Error: "There was an error creating your account. Please try again.",
+      success: false,
+      message: error instanceof Error ? error.message : "User creation failed",
     };
   }
 }
 
-export default function SignUp({ actionData }: Route.ComponentProps) {
+export default function SignUp() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
       <div className="flex w-full max-w-sm flex-col gap-6">

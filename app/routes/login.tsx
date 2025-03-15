@@ -1,6 +1,6 @@
 import { LoginForm } from "~/components/login-form";
 import type { Route } from "./+types/login";
-import { login } from "~/controllers/AuthController";
+import auth from "~/controllers/auth/auth";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,24 +11,14 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  let formData = await request.formData();
-  let email = formData.get("email");
-  let password = formData.get("password");
-
-  if (typeof email !== "string" || typeof password !== "string") {
-    return { success: false, message: "Invalid form data" };
-  }
-
-  email = email.trim();
-  password = password.trim();
-
   try {
-    let result = await login(context, email, password);
-    console.log("User logged in:", result);
-    return { success: true, message: "User logged in" };
+    const formData = await request.formData();
+    return await auth.createSession(formData, context);
   } catch (error) {
-    console.error("Failed to login:", error);
-    return { success: false, message: "Failed to login" };
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Login failed",
+    };
   }
 }
 

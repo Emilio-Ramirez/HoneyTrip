@@ -1,3 +1,12 @@
+import { redirect } from "react-router";
+import type { Route } from "./+types/dashboard";
+
+export async function loader({ context }: Route.LoaderArgs) {
+  console.log("Dasbhoard Loader");
+
+  return { authenticated: true };
+}
+
 export default function dashboard() {
   return (
     <div className="bg-primary">
