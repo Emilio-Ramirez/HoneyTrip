@@ -2,6 +2,7 @@ import { redirect } from "react-router";
 import { createAdminClient, createSessionClient } from "./appwriteConfig";
 import type { Models } from "node-appwrite";
 import { ID } from "node-appwrite";
+import * as schema from "~/database/schema";
 
 interface AuthState {
   getUser: (
@@ -79,8 +80,13 @@ const auth: AuthState = {
 
       return response;
     } catch (error) {
-      console.error("Login failed:", error);
-      throw new Error("Login failed");
+      if (error instanceof Error) {
+        console.error("Error login in:", error.message);
+        throw new Error(error.message);
+      } else {
+        console.error("Error login in:", String(error));
+        throw new Error("Error login in");
+      }
     }
   },
 
@@ -94,13 +100,39 @@ const auth: AuthState = {
     try {
       const { account } = createAdminClient(context);
       // First create the user
-      await account.create(ID.unique(), email, password, name);
+      let appwriteUser = await account.create(
+        ID.unique(),
+        email,
+        password,
+        name
+      );
 
-      // Then reuse your createSession logic to log them in
-      return auth.createSession(formData, context);
+      try {
+        await context.db.insert(schema.users).values({
+          appwrite_id: appwriteUser.$id,
+          email: appwriteUser.email,
+          name: appwriteUser.name,
+        });
+
+        return auth.createSession(formData, context);
+      } catch (dbError) {
+        try {
+          await account.deleteIdentity(appwriteUser.$id);
+          console.error("Error creating user in database:", dbError);
+        } catch (deleteError) {
+          console.error("Error deleting user from Appwrite:", deleteError);
+        }
+        // Re-throw the error
+        throw dbError;
+      }
     } catch (error) {
-      console.error("Error creating user:", error);
-      throw new Error("Error creating user");
+      if (error instanceof Error) {
+        console.error("Error creating user:", error.message);
+        throw new Error(error.message);
+      } else {
+        console.error("2Error in the login:", String(error));
+        throw new Error("Error creating user");
+      }
     }
   },
 
