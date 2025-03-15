@@ -1,9 +1,6 @@
 import { Client, Account } from "node-appwrite";
 
 export function createAdminClient(context: any) {
-  console.log(context.cloudflare.env.APPWRITE_ENDPOINT);
-  console.log(context.cloudflare.env.APPWRITE_PROJECT_ID);
-  console.log(context.cloudflare.env.APPWRITE_API_KEY);
 
   const client = new Client()
     .setEndpoint(context.cloudflare.env.APPWRITE_ENDPOINT || "")

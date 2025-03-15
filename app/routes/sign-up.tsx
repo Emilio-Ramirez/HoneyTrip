@@ -1,6 +1,6 @@
 import { SignUpForm } from "~/components/singup-form";
 import type { Route } from "./+types/landing";
-import { redirect } from "react-router";
+import auth from "~/controllers/auth/auth";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,34 +11,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function action({ request, context }: Route.ActionArgs) {
-  let formData = await request.formData();
-  let name = formData.get("name");
-  let email = formData.get("email");
-  let password = formData.get("password");
-
-  if (
-    typeof email !== "string" ||
-    typeof password !== "string" ||
-    typeof name !== "string"
-  ) {
-    return { success: false, message: "Invalid form data" };
-  }
-
-  name = name.trim();
-  email = email.trim();
-  password = password.trim();
-  try {
-    let userName = await createUser(context, email, password, name);
-
-    console.log("User created:", userName);
-    // TODO: Use a modal to show a success message
-    return redirect("/");
-  } catch (error) {
-    return {
-      // TODO: Use a modal to show an error message
-      Error: "There was an error creating your account. Please try again.",
-    };
-  }
+  const formData = await request.formData();
+  return auth.createUser(formData, context);
 }
 
 export default function SignUp({ actionData }: Route.ComponentProps) {

@@ -1,12 +1,15 @@
 import { redirect } from "react-router";
 import { createAdminClient, createSessionClient } from "./appwriteConfig";
 import type { Models } from "node-appwrite";
+import { ID } from "node-appwrite";
+
 
 interface AuthState {
   getUser: (
     request: Request
   ) => Promise<Models.User<Models.Preferences> | null>;
   createSession: (formData: FormData, context: any) => Promise<Response>;
+  createUser: (formData: FormData, context: any) => Promise<Response>;
   deleteSession: () => Promise<Response>;
 }
 
@@ -82,6 +85,24 @@ const auth: AuthState = {
   },
 
   // Create new user
+  createUser: async (formData: FormData, context: any) => {
+    const data = Object.fromEntries(formData);
+    const email = String(data.email);
+    const password = String(data.password);
+    const name = String(data.name);
+
+    try {
+      const { account } = createAdminClient(context);
+      // First create the user
+      await account.create(ID.unique(), email, password, name);
+
+      // Then reuse your createSession logic to log them in
+      return auth.createSession(formData, context);
+    } catch (error) {
+      console.error("Error creating user:", error);
+      throw error;
+    }
+  },
 
   deleteSession: async () => {
     // Note: We'll handle the session deletion in the route action
