@@ -1,6 +1,5 @@
 import { SignUpForm } from "~/components/singup-form";
 import type { Route } from "./+types/landing";
-import { createUser } from "~/controllers/AuthController";
 import { redirect } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
