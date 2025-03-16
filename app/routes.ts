@@ -3,7 +3,7 @@ import { index, layout, route } from "@react-router/dev/routes";
 
 export default [
   // Protected routes with auth check and sidebar
-  layout("layouts/protected-layout.tsx", [
+  layout("layouts/protected-layout.tsx", { id: "protectedLayout" }, [
     layout("layouts/protected-sidebar.tsx", [
       index("routes/protected/dashboard.tsx"),
       route("Trips", "routes/protected/trips.tsx"),

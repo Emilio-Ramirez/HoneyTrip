@@ -1,16 +1,19 @@
 // app/layouts/protected-layout.tsx
 import { Outlet, redirect, type LoaderFunctionArgs } from "react-router";
 import auth from "../controllers/auth/auth";
+import userController from "~/controllers/UsersController";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request, context }: LoaderFunctionArgs) {
   // Pass request to getUser
-  const user = await auth.getUser(request);
+  const session = await auth.getUser(request);
 
-  if (!user) {
+  if (!session) {
     return redirect("/login");
   }
 
-  return { user };
+  const user = await userController.getUserBySession(session.$id, context);
+
+  return { session, user };
 }
 
 export default function ProtectedLayout() {

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Outlet } from "react-router";
+import { Outlet, useRouteLoaderData } from "react-router";
+import type { Route } from "./+types/protected-sidebar";
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +16,7 @@ import { NavMain } from "app/components/nav-main";
 import { NavProjects } from "app/components/nav-projects";
 import { NavSecondary } from "app/components/nav-secondary";
 import { NavUser } from "app/components/nav-user";
-import { Command } from "lucide-react";
+import { ChefHat } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -28,9 +28,9 @@ import {
 import { Separator } from "app/components/ui/separator";
 import { sidebarData } from "app/data/sidebar-data"; // Move sidebarDAta to this file
 
-export default function ProtectedSidebar({
-  ...props
-}: React.ComponentProps<typeof Sidebar>) {
+export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
+  const protectedLayoutData = useRouteLoaderData("protectedLayout");
+  const { session, user } = protectedLayoutData || {};
   return (
     <SidebarProvider>
       {/* Sidebar component */}
@@ -40,11 +40,11 @@ export default function ProtectedSidebar({
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild>
                 <a href="#">
-                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                    <Command className="size-4" />
+                  <div className="bg-primary text-sidebar-primary flex aspect-square size-8 items-center justify-center rounded-lg">
+                    <ChefHat className="size-4" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Honey Trip</span>
+                    <span className="truncate font-medium">Honey Trip 🍯</span>
                   </div>
                 </a>
               </SidebarMenuButton>
@@ -57,7 +57,7 @@ export default function ProtectedSidebar({
           <NavSecondary items={sidebarData.navSecondary} className="mt-auto" />
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={sidebarData.user} />
+          <NavUser user={user} />
         </SidebarFooter>
       </Sidebar>
 
