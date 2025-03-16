@@ -123,7 +123,7 @@ const auth: AuthState = {
           console.error("Error deleting user from Appwrite:", deleteError);
         }
         // Re-throw the error
-        throw dbError;
+        throw new Error("Error creating user");
       }
     } catch (error) {
       if (error instanceof Error) {
