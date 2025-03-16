@@ -16,26 +16,13 @@ export function meta({}: Route.MetaArgs) {
 export async function action({ request, context }: Route.ActionArgs) {
   try {
     const formData = await request.formData();
-    let result = await auth.createSession(formData, context);
-    return {
-      success: result.ok,
-      message: result.statusText,
-    };
+    return await auth.createSession(formData, context);
   } catch (error) {
-    if (error instanceof Error) {
-      console.log(error);
-      console.error("1Error in the login:", error.message);
-      return {
-        success: false,
-        message: error instanceof Error ? error.message : "Login failed",
-      };
-    } else {
-      console.error("2Error in the login:", String(error));
-      return {
-        success: false,
-        message: "Login failed",
-      };
-    }
+    console.error("Login error:", error);
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "Login failed",
+    };
   }
 }
 
