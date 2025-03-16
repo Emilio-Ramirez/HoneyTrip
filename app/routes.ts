@@ -4,8 +4,10 @@ import { index, layout, route } from "@react-router/dev/routes";
 export default [
   // Protected routes with auth check and sidebar
   layout("layouts/protected-layout.tsx", [
-    index("routes/protected/dashboard.tsx"),
-    route("Trips", "routes/protected/trips.tsx"),
+    layout("layouts/protected-sidebar.tsx", [
+      index("routes/protected/dashboard.tsx"),
+      route("Trips", "routes/protected/trips.tsx"),
+    ]),
   ]),
 
   // Public routes
