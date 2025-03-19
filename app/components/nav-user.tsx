@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-  UserRound,
-} from "lucide-react";
+import { Bell, ChevronsUpDown, LogOut, UserRound } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "app/components/ui/avatar";
 import {
@@ -26,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "app/components/ui/sidebar";
+import { Form } from "react-router";
 
 export function NavUser({
   user,
@@ -91,11 +84,22 @@ export function NavUser({
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut />
-              Log out
-            </DropdownMenuItem>
+            <Form method="post" action="/">
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onSelect={(e) => {
+                  e.preventDefault();
+                  // Add proper type assertion
+                  const target = e.target as HTMLElement;
+                  const form = target.closest("form");
+                  if (form) form.submit();
+                }}
+              >
+                <input type="hidden" name="intent" value="logout" />
+                <LogOut className="h-4 w-4" />
+                Log out
+              </DropdownMenuItem>
+            </Form>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
