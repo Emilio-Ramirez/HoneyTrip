@@ -7,6 +7,7 @@ export default [
     layout("layouts/protected-sidebar.tsx", [
       index("routes/protected/dashboard.tsx"),
       route("Trips", "routes/protected/trips.tsx"),
+      route("Profile", "routes/protected/profile.tsx"),
     ]),
   ]),
 

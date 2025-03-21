@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "app/components/ui/sidebar";
-import { Form } from "react-router";
+import { Form, Link } from "react-router";
 
 export function NavUser({
   user,
@@ -75,10 +75,12 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <UserRound />
-                Profile
-              </DropdownMenuItem>
+              <Link to="/profile" className="block">
+                <DropdownMenuItem>
+                  <UserRound />
+                  Profile
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
