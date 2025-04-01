@@ -5,10 +5,13 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  type ActionFunctionArgs,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import auth from "./controllers/auth/auth";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 //Global fornts
 export const links: Route.LinksFunction = () => [
@@ -64,9 +67,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <NotificationProvider>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </NotificationProvider>
       </body>
     </html>
   );
@@ -103,4 +108,15 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
       )}
     </main>
   );
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "logout") {
+    return auth.deleteSession();
+  }
+
+  return null;
 }
