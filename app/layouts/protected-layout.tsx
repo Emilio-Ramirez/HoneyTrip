@@ -13,7 +13,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
 
   const user = await userController.getUserBySession(session.$id, context);
 
-  return { session, user };
+  return { user };
 }
 
 export default function ProtectedLayout() {

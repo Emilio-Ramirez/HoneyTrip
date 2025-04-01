@@ -11,6 +11,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import auth from "./controllers/auth/auth";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 //Global fornts
 export const links: Route.LinksFunction = () => [
@@ -66,9 +67,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <NotificationProvider>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </NotificationProvider>
       </body>
     </html>
   );

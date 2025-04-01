@@ -6,6 +6,7 @@ type User = {
   email: string;
   name: string;
   profile_photo_url?: string;
+  bio?: string;
 };
 
 interface UserController {
@@ -45,11 +46,13 @@ const userController: UserController = {
 
   updateUser: async (userId, data, context) => {
     try {
-      let user = await context.db.query.users.update({
-        where: eq(users.id, userId),
-        data: data,
-      });
-      return user;
+      // This is how updates should be done in Drizzle
+      let result = await context.db
+        .update(users)
+        .set(data)
+        .where(eq(users.id, userId));
+
+      return result;
     } catch (error) {
       console.error("Error updating user:", error);
       return null;

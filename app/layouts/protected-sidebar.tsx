@@ -30,7 +30,7 @@ import { sidebarData } from "app/data/sidebar-data"; // Move sidebarDAta to this
 
 export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
   const protectedLayoutData = useRouteLoaderData("protectedLayout");
-  const { session, user } = protectedLayoutData || {};
+  const { user } = protectedLayoutData || {};
   return (
     <SidebarProvider>
       {/* Sidebar component */}
