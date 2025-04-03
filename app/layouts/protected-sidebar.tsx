@@ -1,4 +1,10 @@
-import { Outlet, useRouteLoaderData } from "react-router";
+import {
+  Link,
+  Outlet,
+  useRouteLoaderData,
+  useMatches,
+  useLocation,
+} from "react-router";
 import type { Route } from "./+types/protected-sidebar";
 import {
   Sidebar,
@@ -31,6 +37,23 @@ import { sidebarData } from "app/data/sidebar-data"; // Move sidebarDAta to this
 export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
   const protectedLayoutData = useRouteLoaderData("protectedLayout");
   const { user } = protectedLayoutData || {};
+  const matches = useMatches();
+  const location = useLocation();
+
+  const getCurrentPageTitle = () => {
+    console.log("matches", matches);
+    const lastMatch = matches[matches.length - 1];
+    if (lastMatch) {
+      const routeParts = lastMatch.id.split("/");
+      const pageName = routeParts[routeParts.length - 1];
+
+      return pageName
+        .replace(/\.tsx$/, "") // Remove .tsx extension
+        .replace(/-/g, " ") // Replace hyphens with spaces
+        .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalize first letter
+    }
+    return "Data Fetching";
+  };
   return (
     <SidebarProvider>
       {/* Sidebar component */}
@@ -39,14 +62,14 @@ export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild>
-                <a href="#">
+                <Link to="/">
                   <div className="bg-primary text-sidebar-primary flex aspect-square size-8 items-center justify-center rounded-lg">
                     <ChefHat className="size-4" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">Honey Trip 🍯</span>
                   </div>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -73,14 +96,16 @@ export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
+                {getCurrentPageTitle() !== "Dashboard" && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>{getCurrentPageTitle()}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
               </BreadcrumbList>
             </Breadcrumb>
           </div>
