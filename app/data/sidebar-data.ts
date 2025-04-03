@@ -43,8 +43,8 @@ const sidebarData = {
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
+      title: "Recipies",
+      url: "/recipies",
       icon: BookOpen,
       items: [
         {
