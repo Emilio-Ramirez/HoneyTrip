@@ -8,7 +8,8 @@ export default [
       index("routes/protected/dashboard.tsx"),
       route("Trips", "routes/protected/trips.tsx"),
       route("Profile", "routes/protected/profile.tsx"),
-      route("Recipies", "routes/protected/recipies.tsx"),
+      route("Recipes", "routes/protected/recipes.tsx"),
+      route("NewRecipe", "routes/protected/new-recipe.tsx"),
     ]),
   ]),
 

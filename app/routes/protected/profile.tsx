@@ -100,7 +100,9 @@ export default function Profile() {
         <div className="grid p-10 gap-10 border-accent border-2 rounded-xl">
           <Input type="hidden" name="userId" value={user.id} />
           <div className="">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name" className="text-muted">
+              Name
+            </Label>
             <Input
               id="name"
               name="name"
@@ -110,7 +112,9 @@ export default function Profile() {
             />
           </div>
           <div className="">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-muted">
+              Email
+            </Label>
             <Input
               id="email"
               name="email"
@@ -121,7 +125,9 @@ export default function Profile() {
             <input type="hidden" name="email" value={user.email} />
           </div>
           <div className="">
-            <Label htmlFor="name">Profile Photo url</Label>
+            <Label htmlFor="name" className="text-muted">
+              Profile Photo url
+            </Label>
             <Input
               id="profilePhoto"
               name="profilePhoto"
@@ -131,7 +137,9 @@ export default function Profile() {
             />
           </div>
           <div className="">
-            <Label htmlFor="name">Biography</Label>
+            <Label htmlFor="name" className="text-muted">
+              Biography
+            </Label>
             <Input
               id="biography"
               name="biography"

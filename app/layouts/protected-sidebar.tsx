@@ -41,7 +41,6 @@ export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
   const location = useLocation();
 
   const getCurrentPageTitle = () => {
-    console.log("matches", matches);
     const lastMatch = matches[matches.length - 1];
     if (lastMatch) {
       const routeParts = lastMatch.id.split("/");
@@ -54,6 +53,8 @@ export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
     }
     return "Data Fetching";
   };
+  // TODO: Fix breadcrumb
+  // When you are in recipies it and go to recipies it sould be Recipies > New Recipe
   return (
     <SidebarProvider>
       {/* Sidebar component */}
