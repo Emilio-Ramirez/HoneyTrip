@@ -111,7 +111,7 @@ export default function ProtectedSidebar({ loaderData }: Route.ComponentProps) {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-col h-[calc(100vh-4rem)] p-4 pt-0">
+        <div className="flex flex-col p-4 pt-0">
           <Outlet />
         </div>
       </SidebarInset>

@@ -1,6 +1,7 @@
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Form } from "react-router";
 import { Equipment } from "~/components/equipment";
+import { Ingredients } from "~/components/ingredients";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -17,12 +18,12 @@ import { Textarea } from "~/components/ui/textarea";
 export default function NewRecipe() {
   return (
     <div className="flex justify-center">
-      <Form method="post" className="w-full max-w-md">
-        <div className="p-10 border-accent border-2 rounded-xl">
-          <Label className="text-secondary border-b-2 pb-2 mb-2">
+      <Form method="post" className="w-full max-w-4xl">
+        <div className="p-10 border-accent  border-2 rounded-xl">
+          <Label className="text-secondary  border-b-2 pb-2 mb-2">
             Basic Recipe Information
           </Label>
-          <div className="grid gap-5 pb-5">
+          <div className="grid md:grid-cols-2 gap-5 pb-5">
             <div>
               <Label className="text-muted">Name your recipe</Label>
               <Input
@@ -121,7 +122,14 @@ export default function NewRecipe() {
           <Label className="text-secondary border-b-2 pb-2 mb-2">
             Kitchen Requirements
           </Label>
-          <div className="grid gap-5 pb-5">
+          <div className="grid md:grid-cols-2 gap-5 pb-5">
+            <div>
+              <Select>
+                <Label className="text-muted">Equipment</Label>
+                <Equipment />
+              </Select>
+            </div>
+
             <div>
               <Select>
                 <Label className="text-muted">Kitchen Type</Label>
@@ -139,14 +147,17 @@ export default function NewRecipe() {
                 </SelectContent>
               </Select>
             </div>
+          </div>
+          <Label className="text-secondary border-b-2 pb-2 mb-2">
+            Ingredients
+          </Label>
+          <div className="grid md:grid-cols-2 gap-5 pb-5">
             <div>
               <Select>
-                <Label className="text-muted">Equipment</Label>
-                <Equipment />
+                <Ingredients />
               </Select>
             </div>
           </div>
-
           <Button type="submit">Create Recipe</Button>
         </div>
       </Form>
